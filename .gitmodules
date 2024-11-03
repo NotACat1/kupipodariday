@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/NotACat1/kupipodariday-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/NotACat1/kupipodariday-frontend.git
