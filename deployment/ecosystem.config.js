@@ -15,6 +15,10 @@ module.exports = {
         NODE_ENV: process.env.NODE_ENV,
         FRONTEND_PORT: process.env.FRONTEND_PORT || 3000,
       },
+      env_production: {
+        NODE_ENV: 'production',
+        FRONTEND_PORT: process.env.FRONTEND_PORT || 3000,
+      },
     },
     {
       name: 'backend',
@@ -28,6 +32,9 @@ module.exports = {
       env: {
         NODE_ENV: process.env.NODE_ENV,
       },
+      env_production: {
+        NODE_ENV: 'production',
+      },
     },
     {
       name: 'db',
@@ -37,6 +44,9 @@ module.exports = {
       watch: false,
       env: {
         NODE_ENV: process.env.NODE_ENV,
+      },
+      env_production: {
+        NODE_ENV: 'production',
       },
     },
   ],
@@ -49,9 +59,9 @@ module.exports = {
       repo: process.env.DEPLOY_REPO,
       path: process.env.DEPLOY_PATH,
       'post-deploy':
-        'npm install && pm2 reload ecosystem.config.js --env production',
+        'npm install && pm2 reload ./deployment/ecosystem.config.js --env production',
       env: {
-        NODE_ENV: process.env.NODE_ENV,
+        NODE_ENV: 'production',
       },
     },
   },
