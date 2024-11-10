@@ -16,7 +16,6 @@ ssh "$DEPLOY_USER@$DEPLOY_HOST" << EOF
 
   # Обновляем код и перезапускаем приложение
   git fetch origin
-  git reset --hard "$DEPLOY_REF"
   npm install
   pm2 reload ./deployment/ecosystem.config.js --env production
 EOF
