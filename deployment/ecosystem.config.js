@@ -12,7 +12,7 @@ module.exports = {
       instances: process.env.INSTANCES || 2,
       max_memory_restart: process.env.MAX_MEMORY_RESTART || '500M',
       env: {
-        NODE_ENV: process.env.NODE_ENV || 'production',
+        NODE_ENV: process.env.NODE_ENV,
         FRONTEND_PORT: process.env.FRONTEND_PORT || 3000,
       },
     },
@@ -26,7 +26,7 @@ module.exports = {
       instances: process.env.INSTANCES || 2,
       max_memory_restart: process.env.MAX_MEMORY_RESTART || '500M',
       env: {
-        NODE_ENV: process.env.NODE_ENV || 'production',
+        NODE_ENV: process.env.NODE_ENV,
       },
     },
     {
@@ -36,22 +36,22 @@ module.exports = {
       autorestart: true,
       watch: false,
       env: {
-        NODE_ENV: process.env.NODE_ENV || 'production',
+        NODE_ENV: process.env.NODE_ENV,
       },
     },
   ],
 
   deploy: {
     production: {
-      user: process.env.DEPLOY_USER || 'default_user',
-      host: process.env.DEPLOY_HOST || '127.0.0.1',
-      ref: process.env.DEPLOY_REF || 'origin/main',
-      repo: process.env.DEPLOY_REPO || 'git@github.com:username/project.git',
-      path: process.env.DEPLOY_PATH || '/var/www/your_project',
+      user: process.env.DEPLOY_USER,
+      host: process.env.DEPLOY_HOST,
+      ref: process.env.DEPLOY_REF,
+      repo: process.env.DEPLOY_REPO,
+      path: process.env.DEPLOY_PATH,
       'post-deploy':
         'npm install && pm2 reload ecosystem.config.js --env production',
       env: {
-        NODE_ENV: process.env.NODE_ENV || 'production',
+        NODE_ENV: process.env.NODE_ENV,
       },
     },
   },
