@@ -2,12 +2,6 @@ version: '3.9'
 
 services:
   frontend:
-    #build:
-    #  context: ./frontend
-    #  dockerfile: Dockerfile
-    #  args:
-    #    - BACKEND_HOST=${BACKEND_HOST}
-    #    - BACKEND_PORT=${BACKEND_PORT}
     image: notacat1/frontend:latest
     container_name: frontend
     ports:
@@ -22,9 +16,6 @@ services:
           memory: '${FRONTEND_MEM_LIMIT:-512M}'
 
   backend:
-    #build:
-    #  context: ./backend
-    #  dockerfile: Dockerfile
     image: notacat1/backend:latest
     container_name: backend
     environment:
