@@ -1,11 +1,11 @@
 #!/bin/bash
-
+set -e
 source ../.env.deploy
 
-BACKUP_PATH="/path/to/backup"
-TIMESTAMP=$(date +"%F-%H-%M")
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_FILE=backup_${DATE}.sql
 
-echo "Создание резервной копии базы данных..."
-docker exec -t db pg_dump -U ${POSTGRES_USER} ${POSTGRES_DB} > ${BACKUP_PATH}/db_backup_${TIMESTAMP}.sql
+echo "Создание бэкапа базы данных..."
+ssh "$USER@$SERVER_IP" "docker exec db pg_dump -U $POSTGRES_USER $POSTGRES_DB" > "$BACKUP_FILE"
 
-echo "Бэкап создан: ${BACKUP_PATH}/db_backup_${TIMESTAMP}.sql"
+echo "Бэкап базы данных сохранен локально: $BACKUP_FILE"
