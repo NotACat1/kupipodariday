@@ -11,9 +11,9 @@ ssh "$USER@$SERVER_IP" << EOF
   git pull origin "$GITHUB_BRANCH"
 
   echo "Перезапуск контейнеров..."
-  docker-compose down
-  docker-compose pull
-  docker-compose up -d
+  docker compose down
+  docker compose pull
+  docker compose up -d
 EOF
 
 echo "Проект обновлен!"
