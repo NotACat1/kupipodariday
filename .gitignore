@@ -2,3 +2,5 @@
 .env.deploy
 
 /node_modules
+
+/nginx/logs/
