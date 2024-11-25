@@ -6,3 +6,5 @@
 /nginx/logs/
 /nginx/cache/
 /nginx/ssl/
+
+/copy

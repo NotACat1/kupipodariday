@@ -111,7 +111,7 @@ services:
     container_name: grafana
     restart: unless-stopped
     ports:
-      - '${GRAFANA_PORT:-3001}:3001'
+      - '${GRAFANA_PORT:-3001}:${GRAFANA_PORT:-3001}'
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
