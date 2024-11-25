@@ -73,6 +73,12 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
+      
+      - ./nginx/frontend.conf:/etc/nginx/conf.d/frontend.conf
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/cache:/var/cache/nginx
+      - ./nginx/logs:/var/log/nginx
     networks:
       - isolated_network
 
