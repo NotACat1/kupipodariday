@@ -2,7 +2,11 @@ version: '3.9'
 
 services:
   frontend:
-    image: notacat1/frontend:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - BACKEND_HOST=${BACKEND_HOST}
     container_name: frontend
     ports:
       - '${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}'
