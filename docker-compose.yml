@@ -2,9 +2,7 @@ version: '3.9'
 
 services:
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: notacat1/frontend:latest
     container_name: frontend
     ports:
       - '${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}'
