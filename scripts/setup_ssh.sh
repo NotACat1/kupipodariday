@@ -2,16 +2,19 @@
 set -e
 source ../.env.deploy
 
-KEY_PATH=~/.ssh/$SSH_KEY_NAME
+echo "Подключаемся к серверу $SERVER_IP и генерируем SSH-ключ..."
 
-if [ ! -f "$KEY_PATH" ]; then
-  echo "Генерация нового SSH-ключа ($SSH_KEY_NAME)..."
-  ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f "$KEY_PATH" -N ""
-fi
+ssh "$USER@$SERVER_IP" << EOF
+  # Проверяем, существует ли уже ключ
+  KEY_PATH=~/.ssh/$SSH_GITHUB
+  if [ ! -f "\$KEY_PATH" ]; then
+    echo "Генерация нового SSH-ключа на сервере (\$SSH_GITHUB)..."
+    ssh-keygen -t rsa -b 4096 -C "$EMAIL" -f "\$KEY_PATH" -q -N ""
+    chmod 600 "\$KEY_PATH"
+  else
+    echo "SSH-ключ уже существует: \$KEY_PATH"
+  fi
+EOF
 
-echo "Добавляем ключ на сервер $SERVER_IP..."
-ssh-copy-id -i "$KEY_PATH.pub" "$USER@$SERVER_IP"
-
-echo "Добавляем ключ в GitHub..."
-echo "Скопируйте содержимое публичного ключа:"
-cat "$KEY_PATH.pub"
+echo "Публичный ключ для добавления в GitHub:"
+ssh "$USER@$SERVER_IP" "cat ~/.ssh/$SSH_GITHUB.pub"
