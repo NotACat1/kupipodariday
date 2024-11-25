@@ -5,7 +5,7 @@ services:
     image: notacat1/frontend:latest
     container_name: frontend
     ports:
-      - '${FRONTEND_PORT:-3000}:${NGINX_PORT:-80}'
+      - '${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}'
     restart: unless-stopped
     networks:
       - isolated_network
@@ -67,15 +67,19 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - '80:80'
-      - '443:443'
+        - '${NGINX_PORT:-80}:${NGINX_PORT:-80}'
+        - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-      - ./nginx/cache:/var/cache/nginx
-      - ./nginx/logs:/var/log/nginx
+        - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        - ./nginx/ssl:/etc/nginx/ssl:ro
+        - ./nginx/cache:/var/cache/nginx
+        - ./nginx/logs:/var/log/nginx
+        - /etc/letsencrypt:/etc/letsencrypt
     networks:
-      - isolated_network
+        - isolated_network
+    depends_on:
+        - backend
+        - frontend
 
   pgadmin:
     image: dpage/pgadmin4

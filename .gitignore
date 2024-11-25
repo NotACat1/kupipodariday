@@ -4,3 +4,5 @@
 /node_modules
 
 /nginx/logs/
+/nginx/cache/
+/nginx/ssl/
